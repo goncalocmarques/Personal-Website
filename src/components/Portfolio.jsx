@@ -5,7 +5,7 @@ import 'react-slideshow-image/dist/styles.css';
 const Portfolio = ({ projects, size }) => {
     return (
         <section id="portfolio" className="md:px-20 px-4 snap-start">
-            <Slide slidesToScroll={size}>
+            <Slide slidesToScroll={size - 1}>
                 {projects.map((project) => {
                     return (
                         <ProjectSlide {...project} key={project.id}/>

@@ -1,21 +1,21 @@
-import Hero from '../components/Hero';
-import Portfolio from "../components/Portfolio.jsx";
-import About from '../components/About.jsx';
 import { useState, useEffect } from 'react';
-import Loading from "../components/Loading";
-import { db } from "../firebase.js";
-import { collection } from 'firebase/firestore';
-import { onSnapshot } from 'firebase/firestore';
-import Empty from '../components/Empty.jsx';
+import { doc, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import { useLocation } from 'react-router-dom';
+import { db } from '../firebase.js';
+import Hero from '../components/Hero';
+import Portfolio from '../components/Portfolio.jsx';
+import About from '../components/About.jsx';
+import Loading from '../components/Loading';
+import Empty from '../components/Empty.jsx';
 import React from 'react';
 
 const Home = React.forwardRef((props, ref) => {
   const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
-
+  const [cv, setCV] = useState("");
   useEffect(() => {
     getProjects();
+    getCV();
   }, []);
 
   const getProjects = async () => {
@@ -31,6 +31,23 @@ const Home = React.forwardRef((props, ref) => {
     return () => unsub();
   };
 
+  const getCV = async () => {
+    setLoading(true);
+    const docRef = doc(db, 'cv', 'myCV'); 
+    try {
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setCV(docSnap.data().link);
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error getting document:", error);
+    }
+    setLoading(false);
+  }
+
   const location = useLocation();
   
   useEffect(() => {
@@ -44,12 +61,15 @@ const Home = React.forwardRef((props, ref) => {
   }, [location]);
 
 
-  if(loading) return <Loading/>
+  if(loading) return 
+  <div className='flex items-center justify-center w-screen'>
+    <Loading/>
+  </div>
 
   return (
       <div className='bg-backgroundColor w-screen snap-y snap-mandatory overflow-y-scroll'>
             <div id="home">
-              <Hero/>
+              <Hero cvLink={cv}/>
             </div>
             <Empty/>
             <Empty/>

@@ -1,6 +1,6 @@
 import { TypeAnimation } from "react-type-animation";
 
-const Hero = () => {
+const Hero = ( { cvLink } ) => {
     return (
         <div className='w-full flex flex-col justify-center items-center pt-64 snap-start'>
             <h1 className='sm:text-7xl text-5xl mb-3 text-center'>Hi, I'm Gonçalo</h1>
@@ -22,7 +22,10 @@ const Hero = () => {
                     repeat={Infinity}
                 />
             </div>
-            <button className='mt-20 bg-buttonGray hover:opacity-55 h-16 w-48 rounded-full text-white opacity-80'>Checkout my CV</button>
+            <a href={cvLink} type="download" style={{ textDecoration: 'none' }}>
+                <button className='mt-20 bg-buttonGray hover:opacity-55 h-16 w-48 rounded-full text-white opacity-80'>Checkout my CV</button>
+            </a>
+        
         </div>
     );
 }
