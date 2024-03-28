@@ -7,7 +7,7 @@ const Hero = ( { cvLink } ) => {
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '' }}>
                 <TypeAnimation
                     sequence={[
-                        "I'm a computer engineering student",
+                        "I'm a informatics and computing engineering student",
                         1500,
                         "I'm a tech enthusiast",
                         2000,
