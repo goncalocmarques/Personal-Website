@@ -2,22 +2,23 @@ import { Link } from "react-router-dom";
 
 const ProjectSlide = (project) => {
 
-    const iconsWidth = 48;
+    const screenWidth = window.screen.width;
+    const iconsWidth = screenWidth > 500 ? 48 : 32;
     const iconsHeight = iconsWidth;
     let link = `/${project.id}`;
     return (
-      <div className='flex md:flex-row flex-col-reverse justify-around md:ml-32 md:mr-10 mx-10'>
-        <div className='flex flex-col justify-center items-center relative md:w-1/3 rounded-3xl md:px-5'>
+      <div className='flex lg:flex-row flex-col-reverse justify-around lg:ml-32 lg:mr-10 mx-10'>
+        <div className='flex flex-col justify-center items-center relative lg:w-1/3 rounded-3xl lg:px-5'>
             <img src={project.image} alt={project.image_alt} className='h-full w-full object-cover object-center min-w-56 overflow-hidden rounded-3xl shadow-xl'/>
             <Link to={link} className="w-full">
-                <button className='absolute md:bottom-5 bottom-2 left-1/2 bg-buttonGray h-10 w-32 rounded-2xl text-white opacity-85 transform -translate-x-1/2 -translate-y-1/2'>
+                <button className='absolute lg:bottom-5 bottom-2 left-1/2 bg-buttonGray h-10 w-32 rounded-2xl text-white opacity-85 transform -translate-x-1/2 -translate-y-1/2'>
                     Know more
                 </button>
             </Link>
         </div>
-        <div className='flex flex-col justify-center gap-8 md:w-2/3 md:px-32 py-10 w-full'>
+        <div className='flex flex-col justify-center gap-8 lg:w-2/3 lg:px-32 py-10 w-full'>
             <div className='flex md:justify-between justify-center w-full'>
-                <h1 className='md:text-4xl text-xl'>{project.title}</h1>
+                <h1 className='lg:text-4xl text-xl'>{project.title}</h1>
                 <div className='flex flex-row gap-5 md:mr-32 pl-10'>
                     {project.github != null && (
                         <a href={project.github} target="_blank" rel="noreferrer">

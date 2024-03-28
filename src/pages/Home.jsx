@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { doc, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import { useLocation } from 'react-router-dom';
@@ -7,9 +8,9 @@ import Portfolio from '../components/Portfolio.jsx';
 import About from '../components/About.jsx';
 import Loading from '../components/Loading';
 import Empty from '../components/Empty.jsx';
-import React from 'react';
+import Contact from '../components/Contact.jsx';
 
-const Home = React.forwardRef((props, ref) => {
+const Home = React.forwardRef(() => {
   const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [cv, setCV] = useState("");
@@ -61,28 +62,40 @@ const Home = React.forwardRef((props, ref) => {
   }, [location]);
 
 
-  if(loading) return 
-  <div className='flex items-center justify-center w-screen'>
-    <Loading/>
-  </div>
+
+  if(loading) return (
+    <div className='flex items-center justify-center h-screen'>
+        <Loading/>
+    </div>
+  )
+  
 
   return (
-      <div className='bg-backgroundColor w-screen snap-y snap-mandatory overflow-y-scroll'>
-            <div id="home">
+      <div className='bg-backgroundColor w-screen'>
+            <section id="home">
               <Hero cvLink={cv}/>
-            </div>
+            </section>
+
             <Empty/>
             <Empty/>
+
             <section id="portfolio">
               <Portfolio projects={projects} size={projects.length} />
             </section>
+
             <Empty/>
             <Empty/>
+
             <section id="about">
               <About/>
             </section>
-            
-            
+
+            <Empty/>
+            <Empty/>
+
+            <section id="contact">
+              <Contact/>
+            </section>
       </div>
     
   );

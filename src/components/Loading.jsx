@@ -4,7 +4,7 @@ import { ring2 } from 'ldrs'
 const Loading = () => {
     ring2.register();
     return (
-        <div className='w-screen h-screen bg-backgroundColor'>
+        <div className='w-screen h-screen bg-backgroundColor flex items-center justify-center'>
             <l-ring-2
                 size="40"
                 stroke="5"
